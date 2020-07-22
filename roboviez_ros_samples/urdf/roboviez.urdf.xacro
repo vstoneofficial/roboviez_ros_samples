@@ -1,0 +1,549 @@
+<?xml version="1.0"?>
+<robot name="roboviez" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find roboviez_ros_samples)/urdf/common.xacro"/>
+
+  <link name="world"/>
+
+   <!-- Body -->
+
+  <joint name="base_joint" type="floating">
+    <parent link="world"/>
+    <child  link="base_link"/>
+  </joint>
+  <link name="base_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/roboviez_body.dae" />
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </visual>
+  </link>
+
+
+   <!-- Head -->
+
+  <joint name="id14_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="base_link" link_name="id14_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0" origin_z="0.0825" axis_x="0" axis_y="0" axis_z="-1"  rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id14_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/neck_yaw.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id15_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id14_link" link_name="id15_link" lower="-0.7853" upper="0.3926" velocity="1" 
+      origin_x="0" origin_y="0" origin_z="0.018" axis_x="0" axis_y="1" axis_z="0"  rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id15_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/head.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+
+   <!-- R Arm -->
+
+  <joint name="id16_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="base_link" link_name="id16_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="-0.039962" origin_z="0.065934" axis_x="0" axis_y="1" axis_z="0" rpy_x="${M_PI/-20}" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id16_link">
+    <visual>
+      <origin rpy="0 ${M_PI/-2} 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/shoulder.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id17_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id16_link" link_name="id17_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="-0.016" origin_z="0" axis_x="0" axis_y="0" axis_z="1" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id17_link">
+    <visual>
+      <origin rpy="${M_PI/-2} ${M_PI/-2} 0 " xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/arm.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="id18_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id17_link" link_name="id18_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="-0.065" origin_z="0" axis_x="0" axis_y="0" axis_z="-1" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id18_link">
+    <visual>
+      <origin rpy="${M_PI/-2} ${M_PI/-2} 0 " xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/hand.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+
+
+
+   <!-- L Arm -->
+
+  <joint name="id19_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="base_link" link_name="id19_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0.039962" origin_z="0.065934" axis_x="0" axis_y="-1" axis_z="0" rpy_x="${M_PI/20}" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id19_link">
+    <visual>
+      <origin rpy="0 ${M_PI/2} ${M_PI}" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/shoulder.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="id20_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id19_link" link_name="id20_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0.016" origin_z="0" axis_x="0" axis_y="0" axis_z="1" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id20_link">
+    <visual>
+      <origin rpy="${M_PI/2} ${M_PI/2} 0 " xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/arm.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="id21_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id20_link" link_name="id21_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0.065" origin_z="0" axis_x="0" axis_y="0" axis_z="-1" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id21_link">
+    <visual>
+      <origin rpy="${M_PI/2} ${M_PI/2} 0 " xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/hand.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+
+
+  <!-- R Leg -->
+
+  <joint name="id12_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="base_link" link_name="id12_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.0115" origin_y="-0.0275" origin_z="-0.0025" axis_x="0" axis_y="0" axis_z="1" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id12_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_yaw.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id2_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id12_link" link_name="id2_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.026819" origin_y="0" origin_z="-0.017" axis_x="-1" axis_y="0" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id2_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_roll.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id3_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id2_link" link_name="id3_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0.0355" origin_y="0" origin_z="-0.0182" axis_x="0" axis_y="-1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id3_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_pitch.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id4upper_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id3_link" link_name="id4upper_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0.007" origin_y="0" origin_z="0.0095" axis_x="0" axis_y="-1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id4_joint" multiplier="-0.5" offset="${M_PI*0.25}" />
+
+  </joint>
+  <link name="id4upper_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/link_fwd.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id4mot_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id3_link" link_name="id4mot_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.0171402" origin_y="0" origin_z="0.003" axis_x="0" axis_y="-1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id4_joint" multiplier="-0.5" offset="${M_PI*0.25}" />
+
+  </joint>
+  <link name="id4mot_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_kneemot.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id4lowback_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id4mot_link" link_name="id4lowback_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0" origin_z="-0.0520066" axis_x="0" axis_y="-1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id4_joint" multiplier="1" offset="-${M_PI*0.5}" />
+
+  </joint>
+  <link name="id4lowback_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/link_lowback.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id4knee_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id4upper_link" link_name="id4knee_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0.0007" origin_y="0" origin_z="-0.052" axis_x="0" axis_y="-1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id4_joint" multiplier="0.5" offset="${M_PI*-0.25}" />
+
+  </joint>
+  <link name="id4knee_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_knee.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id4lower_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id4knee_link" link_name="id4lower_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0" origin_z="-0.013" axis_x="0" axis_y="-1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id4_joint" multiplier="0.5" offset="-${M_PI*0.25}" />
+
+  </joint>
+  <link name="id4lower_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/link_lower.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id4bottom_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id4lower_link" link_name="id4bottom_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0" origin_z="-0.052" axis_x="0" axis_y="-1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id4_joint" multiplier="-0.5" offset="${M_PI*0.25}" />
+
+  </joint>
+  <link name="id4bottom_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_pitch_low.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id5_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id4bottom_link" link_name="id5_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.00699" origin_y="0" origin_z="0.009499" axis_x="0" axis_y="1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id5_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_pitch_l.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id6_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id5_link" link_name="id6_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.0355" origin_y="0" origin_z="-0.0182" axis_x="1" axis_y="0" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id6_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/footprint_R.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+
+
+  <!-- L Leg -->
+
+
+  <joint name="id13_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="base_link" link_name="id13_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.0115" origin_y="0.0275" origin_z="-0.0025" axis_x="0" axis_y="0" axis_z="1" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id13_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_yaw.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id7_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id13_link" link_name="id7_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.026819" origin_y="0" origin_z="-0.017" axis_x="-1" axis_y="0" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id7_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_roll.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id8_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id7_link" link_name="id8_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0.0355" origin_y="0" origin_z="-0.0182" axis_x="0" axis_y="1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id8_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_pitch.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+
+
+  <joint name="id9upper_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id8_link" link_name="id9upper_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0.007" origin_y="0" origin_z="0.0095" axis_x="0" axis_y="1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id9_joint" multiplier="-0.5" offset="${M_PI*-0.25}" />
+
+  </joint>
+  <link name="id9upper_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/link_fwd.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id9mot_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id8_link" link_name="id9mot_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.0171402" origin_y="0" origin_z="0.003" axis_x="0" axis_y="1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id9_joint" multiplier="-0.5" offset="${M_PI*-0.25}" />
+
+  </joint>
+  <link name="id9mot_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_kneemot.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id9lowback_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id9mot_link" link_name="id9lowback_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0" origin_z="-0.0520066" axis_x="0" axis_y="1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id9_joint" multiplier="1" offset="${M_PI*0.5}" />
+
+  </joint>
+  <link name="id9lowback_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/link_lowback.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id9knee_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id9upper_link" link_name="id9knee_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0.0007" origin_y="0" origin_z="-0.052" axis_x="0" axis_y="1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id9_joint" multiplier="0.5" offset="${M_PI*0.25}" />
+
+  </joint>
+  <link name="id9knee_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_knee.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id9lower_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id9knee_link" link_name="id9lower_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0" origin_z="-0.013" axis_x="0" axis_y="1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id9_joint" multiplier="0.5" offset="${M_PI*0.25}" />
+
+  </joint>
+  <link name="id9lower_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/link_lower.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id9bottom_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id9lower_link" link_name="id9bottom_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="0" origin_y="0" origin_z="-0.052" axis_x="0" axis_y="1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+    <mimic joint="id9_joint" multiplier="-0.5" offset="${M_PI*-0.25}" />
+
+  </joint>
+  <link name="id9bottom_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_pitch_low.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="id10_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id9bottom_link" link_name="id10_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.00699" origin_y="0" origin_z="0.009499" axis_x="0" axis_y="-1" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id10_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/leg_pitch_l.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="id11_joint" type="revolute">
+    <xacro:axis_joint
+      parent_link="id10_link" link_name="id11_link" lower="-1.5707" upper="1.5707" velocity="1" 
+      origin_x="-0.0355" origin_y="0" origin_z="-0.0182" axis_x="1" axis_y="0" axis_z="0" rpy_x="0" rpy_y="0" rpy_z="0">
+    </xacro:axis_joint>
+  </joint>
+  <link name="id11_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+          <mesh filename="package://roboviez_ros_samples/meshes/dae/footprint_L.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+
+
+
+
+</robot>

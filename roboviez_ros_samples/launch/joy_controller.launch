@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="joy_node" pkg="joy" type="joy_node" />
+  <node name="roboviez_ros_controller" pkg="roboviez_ros_samples" type="roboviez_ros_controller.py" />
+  <node name="roboviez_joy_controller" pkg="roboviez_ros_samples" type="roboviez_joy_controller" >
+    <remap from="walk" to="/roboviez_ros_controller/walking"/>
+    <remap from="pow" to="/roboviez_ros_controller/poweron"/>
+  </node>
+</launch>
+
