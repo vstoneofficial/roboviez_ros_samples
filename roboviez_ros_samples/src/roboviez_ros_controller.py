@@ -260,9 +260,9 @@ def main():
         position_data.extend(serial_read(0x0d80+12*3,16))
 
         for num in range(servo_num):
-            pos = tosword(position_data[1+num*2],position_data[0+num*2])
-            if pos!=-32768: 
-                positions[num] = pos /1800.0 * 3.1415926
+            pos = tosword(position_data[1+num*2],position_data[0+num*2]) /1800.0 * 3.1415926
+            if pos<=3.1415926*2: 
+                positions[num] = pos 
 
         pubpositions = Float64MultiArray(data=positions)
         positions_pub.publish(pubpositions)
